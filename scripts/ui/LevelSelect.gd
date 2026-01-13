@@ -1,10 +1,11 @@
 extends Control
 
-@onready var grid = $VBoxContainer/GridContainer
+@onready var grid = $CenterContainer/VBoxContainer/GridContainer
 
 func _ready() -> void:
+	get_tree().paused = false # Force unpause to ensure UI works
 	_generate_level_buttons()
-	$VBoxContainer/BackButton.grab_focus()
+	$CenterContainer/VBoxContainer/BackButton.grab_focus()
 
 func _generate_level_buttons():
 	for i in range(1, 21):
