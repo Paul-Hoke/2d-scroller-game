@@ -9,6 +9,8 @@ var health: int = 3
 var current_level_path: String = "res://scenes/Main.tscn"
 var current_level_name: String = "1"
 
+var last_life_score: int = 0
+
 var sfx_kill: AudioStreamPlayer
 var sfx_damage: AudioStreamPlayer
 
@@ -26,12 +28,19 @@ func _ready() -> void:
 func reset():
 	score = 0
 	health = 3
+	last_life_score = 0
 	score_changed.emit(score)
 	health_changed.emit(health)
 
 func add_score(amount: int):
 	score += amount
 	score_changed.emit(score)
+	
+	# Check for extra life every 100 points
+	if score >= last_life_score + 100:
+		health += 1
+		last_life_score += 100
+		health_changed.emit(health)
 
 func play_kill_sound():
 	sfx_kill.play()
