@@ -11,15 +11,35 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+var previous_health: int = 3
+
 func _ready() -> void:
 	GameState.health_changed.connect(_on_health_changed)
+	GameState.life_gained.connect(_on_life_gained)
+	previous_health = GameState.health
 
 func _on_health_changed(new_health: int) -> void:
-	# Flash red
+	# Only flash red if health decreased (damage taken)
+	if new_health < previous_health:
+		_flash_red()
+	previous_health = new_health
+
+func _on_life_gained() -> void:
+	# Flash green when gaining a life
+	_flash_green()
+
+func _flash_red() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.RED, 0.1)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 	tween.tween_property(self, "modulate", Color.RED, 0.1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+
+func _flash_green() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.GREEN, 0.1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+	tween.tween_property(self, "modulate", Color.GREEN, 0.1)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 
 func _physics_process(delta: float) -> void:

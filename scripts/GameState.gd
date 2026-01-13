@@ -2,6 +2,7 @@ extends Node
 
 signal score_changed(new_score)
 signal health_changed(new_health)
+signal life_gained()
 signal level_changed(new_level_name)
 
 var score: int = 0
@@ -73,6 +74,7 @@ func add_score(amount: int):
 		stats_health_gained += 1
 		last_life_score += 100
 		health_changed.emit(health)
+		life_gained.emit()
 		sfx_life.play()
 
 func play_kill_sound():
