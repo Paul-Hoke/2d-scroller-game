@@ -38,8 +38,12 @@ func _setup_atmosphere(level_num: int):
 		add_child(music_player)
 	
 	var music_path = "res://assets/audio/music_%s.wav" % theme
-	if FileAccess.file_exists(music_path):
-		music_player.stream = load(music_path)
+	var stream = GameState.load_wav(music_path)
+	if stream:
+		if stream is AudioStreamWAV:
+			stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		
+		music_player.stream = stream
 		music_player.autoplay = true
 		music_player.play()
 	
