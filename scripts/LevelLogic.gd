@@ -35,9 +35,10 @@ func _setup_atmosphere(level_num: int):
 		add_child(music_player)
 	
 	var music_path = "res://assets/audio/music_%s.wav" % theme
-	music_player.stream = load(music_path)
-	music_player.autoplay = true
-	music_player.play()
+	if FileAccess.file_exists(music_path):
+		music_player.stream = load(music_path)
+		music_player.autoplay = true
+		music_player.play()
 	
 	# Setup Background
 	var parallax = get_node_or_null("ParallaxBackground")
@@ -47,7 +48,33 @@ func _setup_atmosphere(level_num: int):
 			var bg_path = "res://assets/forest_bg_seamless.png"
 			if theme != "forest":
 				bg_path = "res://assets/bg_%s.png" % theme
-			sprite.texture = load(bg_path)
+			
+			var tex = load(bg_path)
+			if not tex and FileAccess.file_exists(bg_path):
+				# Fallback for missing .import files
+				var img = Image.load_from_file(bg_path)
+				if img:
+					tex = ImageTexture.create_from_image(img)
+			
+			if tex:
+				sprite.texture = tex
+	
+	# Setup Colors (Floor/Platforms)
+	var floor_color = Color(0.27, 0.5, 0.27) # Forest Green
+	var plat_color = Color(0.42, 0.36, 0.25) # Brown
+	
+	match theme:
+		"cave":
+			floor_color = Color(0.2, 0.2, 0.25) # Dark Blue/Grey
+			plat_color = Color(0.1, 0.1, 0.15)
+		"sky":
+			floor_color = Color(0.7, 0.8, 1.0) # Light Blue
+			plat_color = Color(0.9, 0.9, 1.0)
+		"lava":
+			floor_color = Color(0.4, 0.1, 0.0) # Deep Red
+			plat_color = Color(0.2, 0.0, 0.0)
+	
+	_apply_colors_recursive(self, floor_color, plat_color)
 	
 	# Setup Colors (Floor/Platforms)
 	var floor_color = Color(0.27, 0.5, 0.27) # Forest Green
