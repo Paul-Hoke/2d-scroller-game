@@ -1,5 +1,8 @@
 extends Control
 
+func _ready() -> void:
+	$VBoxContainer/RetryButton.grab_focus()
+
 func _on_retry_button_pressed() -> void:
 	GameState.reset()
 	get_tree().change_scene_to_file(GameState.current_level_path)
