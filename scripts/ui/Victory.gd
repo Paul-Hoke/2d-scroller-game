@@ -4,6 +4,7 @@ extends Control
 
 func _ready() -> void:
 	score_label.text = "Final Score: " + str(GameState.score)
+	$VBoxContainer/MenuButton.grab_focus()
 
 func _on_menu_button_pressed() -> void:
 	GameState.reset()

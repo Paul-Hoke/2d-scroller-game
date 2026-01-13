@@ -29,14 +29,14 @@ func _physics_process(delta: float) -> void:
 		jump_count = 0
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or jump_count < max_jumps:
 			velocity.y = jump_velocity
 			jump_count += 1
 			$JumpSound.play()
 
 	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * speed
 		animated_sprite.flip_h = direction < 0
