@@ -8,6 +8,5 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		GameState.add_score(value)
-		# Add a nice little tween for feedback before deleting?
-		# For now, just disappear.
-		queue_free()
+		# Defer removal to avoid issues during physics callback
+		call_deferred("queue_free")

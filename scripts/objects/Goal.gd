@@ -9,7 +9,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print("Level Complete!")
 		GameState.complete_level()
+		# Defer scene change to avoid modifying scene tree during physics callback
 		if next_level_path != "":
-			get_tree().change_scene_to_file(next_level_path)
+			get_tree().call_deferred("change_scene_to_file", next_level_path)
 		else:
-			get_tree().change_scene_to_file("res://scenes/ui/Victory.tscn")
+			get_tree().call_deferred("change_scene_to_file", "res://scenes/ui/Victory.tscn")
