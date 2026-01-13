@@ -39,7 +39,16 @@ func take_damage(amount: int):
 	health_changed.emit(health)
 	sfx_damage.play()
 	if health <= 0:
-		call_deferred("game_over")
+		game_over()
+
+func respawn():
+	health -= 1
+	health_changed.emit(health)
+	sfx_damage.play()
+	if health <= 0:
+		game_over()
+	else:
+		get_tree().reload_current_scene()
 
 func game_over():
 	get_tree().change_scene_to_file("res://scenes/ui/GameOver.tscn")

@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 300.0
 @export var jump_velocity: float = -400.0
 @export var max_jumps: int = 2
+@export var death_y_threshold: float = 1000.0
 
 var jump_count: int = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -22,6 +23,10 @@ func _on_health_changed(new_health: int) -> void:
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 
 func _physics_process(delta: float) -> void:
+	# Check for falling off the level
+	if global_position.y > death_y_threshold:
+		GameState.respawn()
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
