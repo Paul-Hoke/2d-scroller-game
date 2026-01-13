@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Temp files
+cusershokepappdatalocaltempclaude-*
+
+# Local settings
+.claude/settings.local.json

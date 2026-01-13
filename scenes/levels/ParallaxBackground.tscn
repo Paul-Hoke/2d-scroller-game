@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="SkyLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sky" type="ColorRect" parent="SkyLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.529412, 0.807843, 0.921569, 1)
+
+[node name="FarHillsLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Hills" type="ColorRect" parent="FarHillsLayer"]
+offset_top = 300.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.266667, 0.490196, 0.639216, 1)
+
+[node name="NearHillsLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Hills" type="ColorRect" parent="NearHillsLayer"]
+offset_top = 450.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.207843, 0.592157, 0.352941, 1)
