@@ -2,10 +2,12 @@ extends Node
 
 signal score_changed(new_score)
 signal health_changed(new_health)
+signal level_changed(new_level_name)
 
 var score: int = 0
 var health: int = 3
 var current_level_path: String = "res://scenes/Main.tscn"
+var current_level_name: String = "1"
 
 var sfx_kill: AudioStreamPlayer
 var sfx_damage: AudioStreamPlayer
