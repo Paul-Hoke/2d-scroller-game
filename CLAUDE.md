@@ -10,12 +10,19 @@ This is a 2D scroller game built with Godot Engine 4.5. The project uses the For
 
 ### Running the Game
 - Open the project in Godot Editor and press F5, or use the play button
-- Alternatively, export and run: `godot --path . --headless` (headless mode for testing)
-- Run with specific scene: `godot --path . res://path/to/scene.tscn`
+- CLI: `godot --path .` (runs the game from command line)
+- Run specific scene: `godot --path . res://path/to/scene.tscn`
+- Local Godot installation: `& "C:\Users\hokep\Downloads\Godot_v4.5.1-stable_win64.exe\Godot_v4.5.1-stable_win64.exe" --path .`
+
+**Important**: After making code or asset changes, run the project to verify functionality before committing.
 
 ### Project Management
 - Open in Godot Editor: `godot --path . --editor`
 - Export project: Use Godot Editor's Project > Export menu
+
+### Asset Generation
+- Audio generation: `python scripts/generate_audio.py` (creates placeholder WAV files in assets/audio/)
+- Background cleaning: `python scripts/clean_background.py` (processes background images)
 
 ## Code Architecture
 
@@ -68,6 +75,11 @@ All collectibles/interactables use `body_entered` signal and check for "player" 
 - `@export` decorator exposes variables in the Godot editor
 - `@onready` decorator initializes variables when node enters scene tree
 
+### Code Style Conventions
+- **Naming**: `PascalCase` for nodes/classes, `snake_case` for variables/functions
+- **Static typing**: Prefer explicit type hints (e.g., `func _ready() -> void:`)
+- **Groups**: Use Godot groups for interaction checks (e.g., `body.is_in_group("player")`)
+
 ## Key Development Patterns
 
 ### Node Lifecycle
@@ -87,3 +99,39 @@ if Input.is_action_pressed("move_right"):
 
 ## File Encoding
 All text files use UTF-8 encoding (per .editorconfig).
+
+## GitHub Workflow
+
+### Branch Naming Convention
+**Always** create new branches with the issue number at the beginning:
+```bash
+# Good
+git checkout -b 3-remove-list-object
+git checkout -b 42-add-user-stats
+
+# Bad
+git checkout -b remove-list-object
+git checkout -b feature/add-user-stats
+```
+
+### Commit Message Format
+```
+Short description (50 chars or less)
+
+Detailed explanation of changes including:
+- What was changed
+- Why it was changed
+- Any breaking changes
+
+Fixes #issue-number
+
+```
+
+### Pull Request Process
+1. Create feature branch with issue number prefix
+2. Move the issue to "In Progress" in the 2D Scroller Game project
+3. Make changes and commit with descriptive messages
+4. Push branch to origin
+5. Create PR with comprehensive description
+6. Link PR to issue with "Fixes #N"
+7. Move the issue to "In Review" in the 2D Scroller Game project

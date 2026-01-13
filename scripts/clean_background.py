@@ -8,40 +8,49 @@ def remove_background(path):
         datas = img.getdata()
         
         newData = []
-        
-        # We will assume the background is white or light grey/checkerboard.
-        # Let's sample the top-left pixel to find the "primary" background color.
-        bg_color = img.getpixel((0, 0))
-        
-        # Heuristic: If it's a checkerboard, we might have two main background colors.
-        # Let's look at a few pixels to find a secondary background color if it exists.
-        # We'll check the first 20 pixels.
-        bg_colors = set()
         width, height = img.size
         
-        # Sample the border to find background colors
-        for x in range(min(50, width)):
-             bg_colors.add(img.getpixel((x, 0)))
-        for y in range(min(50, height)):
-             bg_colors.add(img.getpixel((0, y)))
-             
-        # Filter for only light colors (checkerboards are usually white/grey)
+        # Sample the 4 corners to find potential background colors
+        corners = [
+            (0, 0),
+            (width - 1, 0),
+            (0, height - 1),
+            (width - 1, height - 1)
+        ]
+        
+        bg_candidates = set()
+        for pos in corners:
+            bg_candidates.add(img.getpixel(pos))
+            
+        # Also sample a bit of the top border to catch gradients/noise
+        for x in range(0, width, 10):
+             bg_candidates.add(img.getpixel((x, 0)))
+
+        # Filter: Only assume it's background if it's "light" (brightness > 200)
+        # unless it's a specific colored background known to be used.
+        # For now, we assume whitish backgrounds for generated assets.
         target_colors = []
-        for c in bg_colors:
-            # Check brightness. (r+g+b)/3
+        for c in bg_candidates:
             brightness = sum(c[:3]) / 3
-            if brightness > 200: # Only remove light colors
+            if brightness > 150: # Increased range to catch greyish backgrounds
                 target_colors.append(c)
         
-        print(f"Targeting colors for removal: {target_colors}")
+        print(f"Targeting colors for removal (samples): {len(target_colors)}")
 
-        tolerance = 30 
+        # Tolerance for color matching (Sum of absolute differences)
+        # Increased to catch compression artifacts
+        tolerance = 100 
         
         for item in datas:
+            # If already transparent, keep it
+            if item[3] == 0:
+                newData.append(item)
+                continue
+
             is_bg = False
             for target in target_colors:
-                # Euclidean distance or simple abs diff
-                diff = sum([abs(item[i] - target[i]) for i in range(3)])
+                # Compare RGB only
+                diff = abs(item[0] - target[0]) + abs(item[1] - target[1]) + abs(item[2] - target[2])
                 if diff < tolerance:
                     is_bg = True
                     break
@@ -58,5 +67,20 @@ def remove_background(path):
     except Exception as e:
         print(f"Error processing {path}: {e}")
 
-remove_background("assets/player_spritesheet.png")
-remove_background("assets/enemy_turtle.png")
+files_to_clean = [
+    "assets/player_spritesheet.png",
+    "assets/enemy_turtle.png",
+    "assets/player_idle.png",
+    "assets/player_jump.png",
+    "assets/player_walk1.png",
+    "assets/player_walk2.png",
+    "assets/enemy_bat_fly.png",
+    "assets/enemy_mushroom.png",
+    "assets/enemy_flying_turtle.png"
+]
+
+for file_path in files_to_clean:
+    if os.path.exists(file_path):
+        remove_background(file_path)
+    else:
+        print(f"File not found: {file_path}")
