@@ -38,6 +38,8 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor() or jump_count < max_jumps:
 			velocity.y = jump_velocity
 			jump_count += 1
+			if jump_count == 2:
+				GameState.record_double_jump()
 			$JumpSound.play()
 
 	# Get the input direction and handle the movement/deceleration.
@@ -54,3 +56,6 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("jump")
 
 	move_and_slide()
+
+func reset_jumps():
+	jump_count = 0

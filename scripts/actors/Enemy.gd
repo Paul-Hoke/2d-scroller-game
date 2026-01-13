@@ -57,6 +57,8 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		if y_velocity > 0 and body.global_position.y < global_position.y:
 			die()
 			body.velocity.y = -300.0 # Bounce
+			if body.has_method("reset_jumps"):
+				body.reset_jumps()
 		else:
 			# Damage player
 			GameState.take_damage(1)
