@@ -27,10 +27,15 @@ def kill_sound(t, d):
     # Quick ascending slide (coin-like but punchier)
     return 400 + (t / d) * 800
 
+def life_sound(t, d):
+    # Cheery rising arpeggio-like slide
+    return 600 + (t / d) * 600 + math.sin(t * 50) * 100
+
 def menu_sound(t, d):
     return 440
 
 if __name__ == "__main__":
     generate_wave("assets/audio/damage.wav", 0.3, damage_sound, 0.6)
     generate_wave("assets/audio/kill.wav", 0.15, kill_sound, 0.5)
+    generate_wave("assets/audio/life.wav", 0.5, life_sound, 0.5)
     print("Generated audio files.")

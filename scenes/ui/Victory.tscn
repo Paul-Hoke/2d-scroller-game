@@ -27,13 +27,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -150.0
-offset_right = 200.0
-offset_bottom = 150.0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -46,6 +46,53 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Final Score: 0"
 horizontal_alignment = 1
+
+[node name="StatsGrid" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="HealthGainedLabel" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "Health Gained:"
+
+[node name="HealthGainedValue" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "0"
+
+[node name="HealthLostLabel" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "Health Lost:"
+
+[node name="HealthLostValue" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "0"
+
+[node name="DoubleJumpsLabel" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "Double Jumps:"
+
+[node name="DoubleJumpsValue" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "0"
+
+[node name="PlaytimeLabel" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "Total Playtime:"
+
+[node name="PlaytimeValue" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "0s"
+
+[node name="AvgTimeLabel" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "Avg Level Time:"
+
+[node name="AvgTimeValue" type="Label" parent="VBoxContainer/StatsGrid"]
+layout_mode = 2
+text = "0s"
 
 [node name="MenuButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

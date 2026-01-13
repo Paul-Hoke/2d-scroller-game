@@ -8,6 +8,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print("Level Complete!")
+		GameState.complete_level()
 		if next_level_path != "":
 			get_tree().change_scene_to_file(next_level_path)
 		else:
