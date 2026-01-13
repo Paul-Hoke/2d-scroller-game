@@ -72,13 +72,13 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 func die():
 	is_dying = true
 	GameState.play_kill_sound()
-	
-	# Disable collisions
+
+	# Disable collisions (use set_deferred for physics properties)
 	collision_layer = 0
 	collision_mask = 0
-	hitbox.monitoring = false
-	hitbox.monitorable = false
-	
+	hitbox.set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)
+
 	# Bounce up
 	velocity.x = 0
 	velocity.y = -400.0

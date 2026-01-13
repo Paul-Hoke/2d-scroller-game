@@ -72,7 +72,7 @@ func die():
 	GameState.play_kill_sound()
 	collision_layer = 0
 	collision_mask = 0
-	hitbox.monitoring = false
-	hitbox.monitorable = false
+	hitbox.set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)
 	velocity.x = 0
 	velocity.y = -400.0
