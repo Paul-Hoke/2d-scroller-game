@@ -16,6 +16,10 @@ func toggle_pause():
 func _on_resume_button_pressed() -> void:
 	toggle_pause()
 
+func _on_level_select_button_pressed() -> void:
+	toggle_pause() # Unpause
+	get_tree().change_scene_to_file("res://scenes/ui/LevelSelect.tscn")
+
 func _on_menu_button_pressed() -> void:
 	toggle_pause() # Unpause before changing scene
 	get_tree().change_scene_to_file("res://scenes/ui/TitleScreen.tscn")
