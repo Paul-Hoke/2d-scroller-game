@@ -209,6 +209,12 @@ All text files use UTF-8 encoding (per .editorconfig).
 
 ## GitHub Workflow
 
+### Repository Information
+- **Repository**: https://github.com/Paul-Hoke/2d-scroller-game
+- **GitHub Project**: "2D Scroller Game" project board
+  - Use this project board to track all issues and pull requests
+  - Move issues between columns: "To Do" → "In Progress" → "In Review" → "Done"
+
 ### Branch Naming Convention
 **Always** create new branches with the issue number at the beginning:
 ```bash
