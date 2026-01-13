@@ -11,6 +11,4 @@ func _on_body_entered(body: Node2D) -> void:
 		if next_level_path != "":
 			get_tree().change_scene_to_file(next_level_path)
 		else:
-			# For now, just reset score and reload
-			GameState.reset()
-			get_tree().reload_current_scene()
+			get_tree().change_scene_to_file("res://scenes/ui/Victory.tscn")

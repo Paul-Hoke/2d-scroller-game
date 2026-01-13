@@ -1,0 +1,266 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/actors/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/levels/ParallaxBackground.tscn" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/actors/Enemy.tscn" id="3_enemy"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Coin.tscn" id="5_coin"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Goal.tscn" id="6_goal"]
+[ext_resource type="PackedScene" path="res://scenes/actors/EnemyFlying.tscn" id="7_bat"]
+[ext_resource type="PackedScene" path="res://scenes/actors/EnemyMushroom.tscn" id="8_mush"]
+[ext_resource type="PackedScene" path="res://scenes/actors/EnemyFlyingTurtle.tscn" id="9_flyt"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="10_pause"]
+[ext_resource type="Script" path="res://scripts/LevelLogic.gd" id="11_logic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(800, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat"]
+size = Vector2(200, 20)
+
+[node name="Level8" type="Node2D"]
+script = ExtResource("11_logic")
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+[node name="PauseMenu" parent="." instance=ExtResource("10_pause")]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_bg")]
+
+[node name="LevelGeometry" type="Node" parent="."]
+
+[node name="StartFloor" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(400, 600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/StartFloor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/StartFloor"]
+offset_left = -400.0
+offset_top = -50.0
+offset_right = 400.0
+offset_bottom = 50.0
+color = Color(0.27, 0.50, 0.27, 1)
+
+[node name="Plat1" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(1040, 517)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat1"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat1"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat2" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(1337, 528)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat2"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat2"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat3" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(1642, 451)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat3"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat3"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat4" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(1965, 404)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat4"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat4"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat5" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(2225, 422)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat5"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat5"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat6" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(2502, 472)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat6"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat6"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat7" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(2845, 484)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat7"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat7"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat8" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(3217, 494)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat8"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat8"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat9" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(3536, 550)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat9"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat9"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat10" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(3806, 550)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat10"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat10"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat11" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(4120, 469)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat11"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat11"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat12" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(4484, 550)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat12"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat12"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="Plat13" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(4743, 550)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat13"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/Plat13"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.42, 0.36, 0.25, 1)
+
+[node name="EndFloor" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(5243, 600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/EndFloor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/EndFloor"]
+offset_left = -400.0
+offset_top = -50.0
+offset_right = 400.0
+offset_bottom = 50.0
+color = Color(0.27, 0.50, 0.27, 1)
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Bat1" parent="Enemies" instance=ExtResource("7_bat")]
+position = Vector2(1040, 367)
+
+[node name="Mush5" parent="Enemies" instance=ExtResource("8_mush")]
+position = Vector2(2225, 422)
+
+[node name="Mush10" parent="Enemies" instance=ExtResource("8_mush")]
+position = Vector2(3806, 550)
+
+[node name="Bat11" parent="Enemies" instance=ExtResource("7_bat")]
+position = Vector2(4120, 319)
+[node name="Collectibles" type="Node" parent="."]
+
+[node name="Coin1" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1040, 467)
+
+[node name="Coin3" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1642, 401)
+
+[node name="Coin6" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(2502, 422)
+
+[node name="Coin9" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(3536, 500)
+
+[node name="Coin10" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(3806, 500)
+
+[node name="Coin11" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(4120, 419)
+
+[node name="Coin13" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(4743, 500)
+
+[node name="Goal" parent="." instance=ExtResource("6_goal")]
+position = Vector2(5443, 500)
+next_level_path = "res://scenes/levels/Level9.tscn"
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(100, 500)

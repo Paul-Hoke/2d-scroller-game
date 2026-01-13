@@ -69,3 +69,49 @@ The project follows a standard Godot organization pattern:
 *   [ ] "Game Over" and "Victory" screens (currently just reloads).
 *   [ ] More complex level design (TileMaps).
 *   [ ] varied Enemy types.
+
+## Auto-Run Instructions
+
+**Crucial:** After making any code or asset changes, ALWAYS automatically run the project using the following command to allow for immediate user feedback:
+
+```powershell
+& "C:\Users\hokep\Downloads\Godot_v4.5.1-stable_win64.exe\Godot_v4.5.1-stable_win64.exe" --path .
+```
+
+## GitHub Workflow
+
+We will be pulling issues from the **2D Scroller Game** GitHub project.
+
+### Branch Naming Convention
+**Always** create new branches with the issue number at the beginning:
+```bash
+# Good
+git checkout -b 3-remove-list-object
+git checkout -b 42-add-user-stats
+
+# Bad
+git checkout -b remove-list-object
+git checkout -b feature/add-user-stats
+```
+
+### Commit Message Format
+```
+Short description (50 chars or less)
+
+Detailed explanation of changes including:
+- What was changed
+- Why it was changed
+- Any breaking changes
+
+Fixes #issue-number
+
+```
+
+### Pull Request Process
+1. Create feature branch with issue number prefix
+2. Move the issue to "In Progress" in the 2D Scroller Game project
+3. Make changes and commit with descriptive messages
+4. Push branch to origin
+5. Create PR with comprehensive description
+6. Link PR to issue with "Fixes #N"
+7. Move the issue to "In Review" in the 2D Scroller Game project
