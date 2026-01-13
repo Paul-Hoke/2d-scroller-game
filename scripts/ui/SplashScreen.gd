@@ -1,7 +1,7 @@
 extends Control
 
 @export var title_screen_path: String = "res://scenes/ui/TitleScreen.tscn"
-@export var display_time: float = 3.0
+@export var display_time: float = 5.0
 
 var elapsed_time: float = 0.0
 

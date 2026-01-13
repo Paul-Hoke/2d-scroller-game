@@ -48,6 +48,13 @@ theme_override_font_sizes/font_size = 24
 text = "A 2D Platformer Adventure"
 horizontal_alignment = 1
 
+[node name="DeveloperLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 18
+text = "Developed by Paul Hoke"
+horizontal_alignment = 1
+
 [node name="BottomMargin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
