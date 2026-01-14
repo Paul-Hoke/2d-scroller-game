@@ -18,6 +18,14 @@ func _ready() -> void:
 	GameState.level_changed.emit(str(level_num))
 	
 	_setup_atmosphere(level_num)
+	
+	# Add Dynamic Game Director
+	var director_script = load("res://scripts/GameDirector.gd")
+	if director_script:
+		var director = Node.new()
+		director.name = "GameDirector"
+		director.set_script(director_script)
+		add_child(director)
 
 func _setup_atmosphere(level_num: int):
 	var theme = "forest"
