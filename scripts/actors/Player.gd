@@ -55,7 +55,9 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or jump_count < max_jumps:
+		var can_double_jump = GameState.powerups.get("double_jump", false)
+		# Allow jump if on floor, OR if we have jumps left AND (it's the first jump OR we have double jump powerup)
+		if is_on_floor() or (jump_count < max_jumps and (jump_count == 0 or can_double_jump)):
 			velocity.y = jump_velocity
 			jump_count += 1
 			if jump_count == 2:

@@ -4,6 +4,8 @@ signal score_changed(new_score)
 signal health_changed(new_health)
 signal life_gained()
 signal level_changed(new_level_name)
+signal keys_changed(count)
+signal powerup_obtained(name)
 
 var score: int = 0
 var health: int = 3
@@ -11,6 +13,12 @@ var current_level_path: String = "res://scenes/Main.tscn"
 var current_level_name: String = "1"
 
 var last_life_score: int = 0
+
+# Inventory / Metroidvania logic
+var keys: int = 0
+var powerups: Dictionary = {
+	"double_jump": false
+}
 
 # Stats for Victory Screen
 var stats_health_gained: int = 0
@@ -47,6 +55,8 @@ func reset():
 	score = 0
 	health = 3
 	last_life_score = 0
+	keys = 0
+	powerups = {"double_jump": false}
 	stats_health_gained = 0
 	stats_health_lost = 0
 	stats_double_jumps = 0
@@ -55,9 +65,12 @@ func reset():
 	_level_start_time = Time.get_ticks_msec() / 1000.0
 	score_changed.emit(score)
 	health_changed.emit(health)
+	keys_changed.emit(keys)
 
 func start_level_timer():
 	_level_start_time = Time.get_ticks_msec() / 1000.0
+	keys = 0
+	keys_changed.emit(keys)
 
 func complete_level():
 	var end_time = Time.get_ticks_msec() / 1000.0
@@ -76,6 +89,21 @@ func add_score(amount: int):
 		health_changed.emit(health)
 		life_gained.emit()
 		sfx_life.play()
+
+func add_key():
+	keys += 1
+	keys_changed.emit(keys)
+
+func use_key() -> bool:
+	if keys > 0:
+		keys -= 1
+		keys_changed.emit(keys)
+		return true
+	return false
+
+func add_powerup(p_name: String):
+	powerups[p_name] = true
+	powerup_obtained.emit(p_name)
 
 func play_kill_sound():
 	sfx_kill.play()
