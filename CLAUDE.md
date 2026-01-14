@@ -12,9 +12,9 @@ This is a 2D platformer scroller game built with Godot Engine 4.5 featuring 20 p
 - Open the project in Godot Editor and press F5, or use the play button
 - CLI: `godot --path .` (runs the game from command line)
 - Run specific scene: `godot --path . res://path/to/scene.tscn`
-- Local Godot installation: `& "C:\Users\hokep\Downloads\Godot_v4.5.1-stable_win64.exe\Godot_v4.5.1-stable_win64.exe" --path .`
+- Local Godot installation: `Get-Process Godot_v4.5.1-stable_win64 -ErrorAction SilentlyContinue | Stop-Process -Force; & "C:\Users\hokep\Downloads\Godot_v4.5.1-stable_win64.exe\Godot_v4.5.1-stable_win64.exe" --path . --position 96,96`
 
-**Important**: After making code or asset changes, run the project to verify functionality before committing.
+**Important**: After making code or asset changes, run the project to verify functionality before committing. Always close any running instances and open the window at position 96,96.
 
 ### Project Management
 - Open in Godot Editor: `godot --path . --editor`

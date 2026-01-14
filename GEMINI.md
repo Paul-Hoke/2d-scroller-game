@@ -72,10 +72,10 @@ The project follows a standard Godot organization pattern:
 
 ## Auto-Run Instructions
 
-**Crucial:** After making any code or asset changes, ALWAYS automatically run the project using the following command to allow for immediate user feedback:
+**Crucial:** After making any code or asset changes, ALWAYS automatically run the project using the following command to allow for immediate user feedback. Always close any existing instances first and open the window at position 96,96.
 
 ```powershell
-& "C:\Users\hokep\Downloads\Godot_v4.5.1-stable_win64.exe\Godot_v4.5.1-stable_win64.exe" --path .
+Get-Process Godot_v4.5.1-stable_win64 -ErrorAction SilentlyContinue | Stop-Process -Force; & "C:\Users\hokep\Downloads\Godot_v4.5.1-stable_win64.exe\Godot_v4.5.1-stable_win64.exe" --path . --position 96,96
 ```
 
 ## GitHub Workflow

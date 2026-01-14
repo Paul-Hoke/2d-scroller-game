@@ -9,3 +9,7 @@ cusershokepappdatalocaltempclaude-*
 .claude/settings.local.json
 
 nanobanana-output/
+
+build/
+
+export_presets.cfg
