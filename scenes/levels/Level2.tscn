@@ -45,7 +45,7 @@ offset_bottom = 50.0
 color = Color(0.27, 0.50, 0.27, 1)
 
 [node name="Plat1" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(961, 493)
+position = Vector2(988, 487)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat1"]
 shape = SubResource("RectangleShape2D_plat")
@@ -58,7 +58,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat2" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(1251, 454)
+position = Vector2(1278, 519)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat2"]
 shape = SubResource("RectangleShape2D_plat")
@@ -71,7 +71,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat3" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(1524, 401)
+position = Vector2(1564, 550)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat3"]
 shape = SubResource("RectangleShape2D_plat")
@@ -84,7 +84,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat4" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(1837, 250)
+position = Vector2(1835, 510)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat4"]
 shape = SubResource("RectangleShape2D_plat")
@@ -96,8 +96,21 @@ offset_right = 100.0
 offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
+[node name="PlatKey4" type="StaticBody2D" parent="LevelGeometry"]
+position = Vector2(1835, 290)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/PlatKey4"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="ColorRect" type="ColorRect" parent="LevelGeometry/PlatKey4"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.8, 0.7, 0.2, 1)
+
 [node name="Plat5" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(2155, 214)
+position = Vector2(2089, 537)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat5"]
 shape = SubResource("RectangleShape2D_plat")
@@ -110,7 +123,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat6" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(2464, 234)
+position = Vector2(2351, 550)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat6"]
 shape = SubResource("RectangleShape2D_plat")
@@ -123,7 +136,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat7" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(2726, 250)
+position = Vector2(2640, 488)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat7"]
 shape = SubResource("RectangleShape2D_plat")
@@ -136,7 +149,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat8" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(2983, 315)
+position = Vector2(2920, 536)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat8"]
 shape = SubResource("RectangleShape2D_plat")
@@ -149,7 +162,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat9" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(3249, 406)
+position = Vector2(3204, 530)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat9"]
 shape = SubResource("RectangleShape2D_plat")
@@ -162,7 +175,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="Plat10" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(3539, 416)
+position = Vector2(3468, 455)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/Plat10"]
 shape = SubResource("RectangleShape2D_plat")
@@ -175,7 +188,7 @@ offset_bottom = 10.0
 color = Color(0.42, 0.36, 0.25, 1)
 
 [node name="EndFloor" type="StaticBody2D" parent="LevelGeometry"]
-position = Vector2(4039, 600)
+position = Vector2(3968, 600)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/EndFloor"]
 shape = SubResource("RectangleShape2D_floor")
@@ -188,42 +201,33 @@ offset_bottom = 50.0
 color = Color(0.27, 0.50, 0.27, 1)
 
 [node name="Door" parent="LevelGeometry" instance=ExtResource("13_door")]
-position = Vector2(2983, 273)
+position = Vector2(2920, 494)
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Mush1" parent="Enemies" instance=ExtResource("8_mush")]
-position = Vector2(961, 493)
+position = Vector2(988, 487)
 
-[node name="Bat5" parent="Enemies" instance=ExtResource("7_bat")]
-position = Vector2(2155, 64)
+[node name="Turtle5" parent="Enemies" instance=ExtResource("3_enemy")]
+position = Vector2(2089, 537)
 
-[node name="Bat7" parent="Enemies" instance=ExtResource("7_bat")]
-position = Vector2(2726, 100)
+[node name="Turtle7" parent="Enemies" instance=ExtResource("3_enemy")]
+position = Vector2(2640, 488)
 [node name="Collectibles" type="Node" parent="."]
 
-[node name="Coin1" parent="Collectibles" instance=ExtResource("5_coin")]
-position = Vector2(961, 443)
-
-[node name="Coin2" parent="Collectibles" instance=ExtResource("5_coin")]
-position = Vector2(1251, 404)
-
 [node name="Powerup" parent="Collectibles" instance=ExtResource("14_powerup")]
-position = Vector2(1524, 351)
+position = Vector2(1564, 500)
 
 [node name="Key" parent="Collectibles" instance=ExtResource("12_key")]
-position = Vector2(1837, 200)
-
-[node name="Coin5" parent="Collectibles" instance=ExtResource("5_coin")]
-position = Vector2(2155, 164)
-
-[node name="Coin6" parent="Collectibles" instance=ExtResource("5_coin")]
-position = Vector2(2464, 184)
+position = Vector2(1835, 240)
 
 [node name="Coin9" parent="Collectibles" instance=ExtResource("5_coin")]
-position = Vector2(3249, 356)
+position = Vector2(3204, 480)
+
+[node name="Coin10" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(3468, 405)
 
 [node name="Goal" parent="." instance=ExtResource("6_goal")]
-position = Vector2(4239, 500)
+position = Vector2(4168, 500)
 next_level_path = "res://scenes/levels/Level3.tscn"
 
 [node name="Player" parent="." instance=ExtResource("1_player")]

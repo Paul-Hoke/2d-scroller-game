@@ -6,8 +6,8 @@ def generate_level(level_num):
     
     # Difficulty parameters
     length = 3000 + (level_num * 200)
-    gap_max = 200 + (level_num * 10) # Max gap between platforms
-    if gap_max > 400: gap_max = 400
+    gap_max = 180 + (level_num * 5) # Reduce gap slightly for fairness
+    if gap_max > 300: gap_max = 300
     
     # Resources
     content = """[gd_scene load_steps=16 format=3]
@@ -50,7 +50,7 @@ script = ExtResource(\"11_logic\")
 position = Vector2(400, 600)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/StartFloor"]
-shape = SubResource("RectangleShape2D_floor")
+shape = SubResource(\"RectangleShape2D_floor\")
 
 [node name="ColorRect" type="ColorRect" parent="LevelGeometry/StartFloor"]
 offset_left = -400.0
@@ -58,7 +58,7 @@ offset_top = -50.0
 offset_right = 400.0
 offset_bottom = 50.0
 color = Color(0.27, 0.50, 0.27, 1)
-"""
+""".format(level_num)
 
     # Procedural Platforms
     current_x = 800
@@ -78,34 +78,24 @@ color = Color(0.27, 0.50, 0.27, 1)
         {"id": "9_flyt", "name": "FlyTurtle", "y_offset": -100},
     ]
 
-    # Metroidvania Planning
-    # Key usually around 40-60% of the way
-    # Door usually around 80-90% of the way
     total_platforms_est = int((length - 800) / 250)
     key_plat_idx = random.randint(int(total_platforms_est * 0.4), int(total_platforms_est * 0.6))
     door_plat_idx = random.randint(int(total_platforms_est * 0.8), int(total_platforms_est * 0.9))
     
-    # Powerup: Double Jump in Level 2
     powerup_plat_idx = -1
     if level_num == 2:
-        powerup_plat_idx = 3 # Early in level 2
+        powerup_plat_idx = 3
 
     while current_x < length:
-        # Platform
         plat_index += 1
         gap = random.randint(150, gap_max)
-        y_change = random.randint(-100, 100)
+        y_change = random.randint(-80, 80) # Reduce Y variation for main path consistency
         
-        # Force key platform high
-        if plat_index == key_plat_idx:
-            current_y = 250 # High up
-            y_change = 0
-            
         current_x += gap
         current_y += y_change
         
         # Clamp Y
-        if current_y < 200: current_y = 200
+        if current_y < 250: current_y = 250
         if current_y > 550: current_y = 550
         
         content += """
@@ -124,28 +114,47 @@ color = Color(0.42, 0.36, 0.25, 1)
 """.format(plat_index, int(current_x), int(current_y))
 
         # Metroidvania Elements
+        
+        # KEY: Spawn on a DETOUR platform above the current one
         if plat_index == key_plat_idx:
+             # Create extra platform
+             extra_y = current_y - 220 # High up, requires double jump or precision
+             content += """
+[node name=\"PlatKey{0}\" type=\"StaticBody2D\" parent=\"LevelGeometry\"]
+position = Vector2({1}, {2})
+
+[node name=\"CollisionShape2D\" type=\"CollisionShape2D\" parent=\"LevelGeometry/PlatKey{0}\"]
+shape = SubResource(\"RectangleShape2D_plat\")
+
+[node name=\"ColorRect\" type=\"ColorRect\" parent=\"LevelGeometry/PlatKey{0}\"]
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
+color = Color(0.8, 0.7, 0.2, 1)
+""".format(plat_index, int(current_x), int(extra_y))
+
              collectibles_content += """
-[node name="Key" parent="Collectibles" instance=ExtResource("12_key")]
+[node name="Key" parent="Collectibles" instance=ExtResource(\"12_key\")]
 position = Vector2({0}, {1})
-""".format(int(current_x), int(current_y) - 50)
+""".format(int(current_x), int(extra_y) - 50)
         
         elif plat_index == door_plat_idx:
-            # Door sits on the platform
+            # Door sits on the main platform
             geometry_extras += """
-[node name="Door" parent="LevelGeometry" instance=ExtResource("13_door")]
+[node name="Door" parent="LevelGeometry" instance=ExtResource(\"13_door\")]
 position = Vector2({0}, {1})
-""".format(int(current_x), int(current_y) - 42) # Adjust for door size (64px high, origin center)
+""".format(int(current_x), int(current_y) - 42)
         
         elif plat_index == powerup_plat_idx:
+             # Powerup on main path
              collectibles_content += """
-[node name="Powerup" parent="Collectibles" instance=ExtResource("14_powerup")]
+[node name="Powerup" parent="Collectibles" instance=ExtResource(\"14_powerup\")]
 position = Vector2({0}, {1})
 """.format(int(current_x), int(current_y) - 50)
 
-        # Standard Spawns (Enemies/Coins) - Don't spawn on special platforms to avoid clutter
         elif plat_index != key_plat_idx and plat_index != door_plat_idx:
-            # Chance for enemy
+            # Enemy / Coin
             if random.random() < 0.4 + (level_num * 0.01):
                 enemy = random.choice(enemy_types)
                 enemies_content += """
@@ -153,10 +162,9 @@ position = Vector2({0}, {1})
 position = Vector2({3}, {4})
 """.format(enemy["name"], plat_index, enemy["id"], int(current_x), int(current_y) + enemy["y_offset"])
 
-            # Chance for coin
             if random.random() < 0.5:
                  collectibles_content += """
-[node name="Coin{0}" parent="Collectibles" instance=ExtResource("5_coin")]
+[node name="Coin{0}" parent="Collectibles" instance=ExtResource(\"5_coin\")]
 position = Vector2({1}, {2})
 """.format(plat_index, int(current_x), int(current_y) - 50)
              
@@ -196,7 +204,6 @@ position = Vector2(100, 500)
     return content
 
 if __name__ == "__main__":
-    # Generate Levels 2-20 (Level 1/Main is manual)
     for i in range(2, 21):
         fname = f"scenes/levels/Level{i}.tscn"
         print(f"Generating {fname}...")
